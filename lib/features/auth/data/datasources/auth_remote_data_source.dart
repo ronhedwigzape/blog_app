@@ -1,3 +1,4 @@
+import 'package:blog_app/core/error/exceptions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
@@ -44,11 +45,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         );
 
         if (response.user == null) {
-          throw '';
+          throw const ServerException('User is null!');
         }
         return response.user!.id;
       } catch (e) {
-
+        throw  ServerException(e.toString());
       }
   }
   
